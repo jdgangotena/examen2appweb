@@ -1,0 +1,210 @@
+<div class="card my-5">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-end mb-4">
+        <h3 class="mb-0">
+          {{ titulo }}
+          <!-- Interpolación para enviar datos desde el .ts hacia el html -->
+        </h3>
+      </div>
+      <div class="row">
+        <form [formGroup]="frm_inscripcion" novalidate (ngSubmit)="grabar()">
+          <div class="container mt-4" id="impresion">
+            <!-- Encabezado de la Inscripción -->
+            <div class="row">
+              <div class="col-6">
+                <h2>Municipalidad de Quito</h2>
+                <p>RUC: 1234567890</p>
+                <p>Dirección: Calle Ejemplo 456, Quito, Ecuador</p>
+                <p>Teléfono: +593 999 999 999</p>
+                <p>Email: info@quito.gob.ec</p>
+              </div>
+              <div class="col-6 text-end">
+                <h4>Inscripción</h4>
+                <p>No. 001-001-000000001</p>
+                <p>
+                  <label class="form-label" for="fecha">Fecha de Inscripción</label>
+                  <input type="date" class="form-control" formControlName="Fecha" />
+                  <div *ngIf="frm_inscripcion.get('Fecha').invalid && frm_inscripcion.get('Fecha').touched">
+                    <small style="color: red" *ngIf="frm_inscripcion.get('Fecha').hasError('required')">
+                      La fecha es requerida
+                    </small>
+                  </div>
+                </p>
+              </div>
+            </div>
+  
+            <hr />
+  
+            <!-- Información del Participante -->
+            <div class="row">
+              <div class="col-12">
+                <h5>Datos del Participante</h5>
+                <select class="form-control" formControlName="participante" (change)="cambio($event)">
+                  <option>Seleccione una opción</option>
+                  <option *ngFor="let participante of listaParticipantes" [value]="participante.idParticipante">
+                    {{ participante.Nombre }}
+                  </option>
+                </select>
+                <p *ngIf="selectedParticipante">
+                  <strong>Nombre:</strong>
+                  {{ selectedParticipante.Nombre }}
+                </p>
+                <p *ngIf="selectedParticipante">
+                  <strong>Cédula/RUC:</strong>
+                  {{ selectedParticipante.Cedula }}
+                </p>
+                <p *ngIf="selectedParticipante">
+                  <strong>Dirección:</strong>
+                  {{ selectedParticipante.Direccion }}
+                </p>
+                <p *ngIf="selectedParticipante">
+                  <strong>Teléfono:</strong>
+                  {{ selectedParticipante.Telefono }}
+                </p>
+              </div>
+            </div>
+  
+            <hr />
+  
+            <!-- Detalle de la Inscripción -->
+            <div class="row">
+              <div class="col-12">
+                <button
+                  type="button"
+                  class="btn btn-primary noimprimir"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addTallerModal"
+                  (click)="talleresLista($event)"
+                >
+                  Agregar Taller
+                </button>
+                <table class="table table-bordered">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Nombre del Taller</th>
+                      <th>Fecha</th>
+                      <th>Hora</th>
+                      <th>Duración</th>
+                      <th>Subtotal</th>
+                      <th>IVA (12%)</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of tallerSeleccionado">
+                      <td>{{ item.Nombre_Taller }}</td>
+                      <td>{{ item.Fecha | date }}</td>
+                      <td>{{ item.Hora | date:'shortTime' }}</td>
+                      <td>{{ item.Duracion }}</td>
+                      <td>{{ item.Subtotal | currency }}</td>
+                      <td>{{ item.IVA | currency }}</td>
+                      <td>{{ item.Total | currency }}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="5" class="text-end">Subtotal</th>
+                      <th colspan="2">
+                        <input type="text" class="form-control" formControlName="Sub_total" (blur)="calculos()" />
+                        <div *ngIf="frm_inscripcion.get('Sub_total').invalid && frm_inscripcion.get('Sub_total').touched">
+                          <small style="color: red" *ngIf="frm_inscripcion.get('Sub_total').hasError('required')">
+                            El subtotal es requerido
+                          </small>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th colspan="5" class="text-end">SUB TOTAL IVA (12%)</th>
+                      <th colspan="2">
+                        <input type="text" class="form-control" formControlName="Sub_total_iva" />
+                        <div *ngIf="frm_inscripcion.get('Sub_total_iva').invalid && frm_inscripcion.get('Sub_total_iva').touched">
+                          <small style="color: red" *ngIf="frm_inscripcion.get('Sub_total_iva').hasError('required')">
+                            El subtotal IVA es requerido
+                          </small>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th colspan="5" class="text-end">IVA (12%)</th>
+                      <th colspan="2">
+                        <div class="form-group mb-3">
+                          <input type="text" class="form-control" formControlName="Valor_IVA" readonly value="0.12" />
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th colspan="5" class="text-end">Total a Pagar</th>
+                      <th colspan="2">
+                        <div class="form-group mb-3">
+                          <input type="text" class="form-control" ngValue="total" readonly [value]="totalapagar" />
+                        </div>
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+  
+            <hr />
+  
+            <!-- Información Adicional -->
+            <div class="row">
+              <div class="col-12">
+                <p>
+                  <strong>Forma de pago:</strong>
+                  Transferencia Bancaria
+                </p>
+                <p>
+                  <strong>Cuenta Bancaria:</strong>
+                  Banco Pichincha, Cta: 123456789
+                </p>
+                <p>
+                  <strong>Nota:</strong>
+                  Gracias por su inscripción.
+                </p>
+              </div>
+            </div>
+          </div>
+  
+          <div class="d-grid mt-3">
+            <button type="submit" class="btn btn-primary">Grabar Inscripción</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="addTallerModal" tabindex="-1" aria-labelledby="addTallerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addTallerModalLabel">Agregar Taller</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario para agregar taller -->
+          <form #tallerForm="ngForm" (ngSubmit)="cargaModal(tallerForm)">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre del Taller</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" ngModel required />
+            </div>
+            <div class="mb-3">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input type="date" class="form-control" id="fecha" name="fecha" ngModel required />
+            </div>
+            <div class="mb-3">
+              <label for="hora" class="form-label">Hora</label>
+              <input type="time" class="form-control" id="hora" name="hora" ngModel required />
+            </div>
+            <div class="mb-3">
+              <label for="duracion" class="form-label">Duración</label>
+              <input type="text" class="form-control" id="duracion" name="duracion" ngModel required />
+            </div>
+  
+            <button type="submit" class="btn btn-primary" [disabled]="!tallerForm.form.valid">Agregar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

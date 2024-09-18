@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="Lista de Participantes" blockClass="pc-component">
+        <div class="col-md-12 col-xl-8">
+          <h5 class="mb-3">
+            <a href="/nuevoparticipante" class="btn btn-outline-dark">Nuevo Participante</a>
+          </h5>
+          <div class="card tbl-card">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th class="text-end">Correo</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let participante of listaParticipantes; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ participante.nombre }}</td>
+                    <td>{{ participante.apellido }}</td>
+                    <td>{{ participante.email }}</td>
+                    <td>
+                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarparticipante', participante.participante_id]">
+                        Editar
+                      </button>
+                      <button (click)="eliminar(participante.participante_id)" type="button" class="btn btn-outline-danger">Eliminar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </app-card>
+    </div>
+  </div>
+  

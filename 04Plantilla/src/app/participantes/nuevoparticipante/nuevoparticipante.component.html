@@ -1,0 +1,46 @@
+<div class="card my-5">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-end mb-4">
+        <h3 class="mb-0">
+          {{ titulo }}
+        </h3>
+      </div>
+      <form [formGroup]="frm_Participante" (ngSubmit)="grabar()">
+        <div class="row">
+          <div class="form-group mb-3">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del participante" />
+            <div *ngIf="frm_Participante.get('nombre').invalid && frm_Participante.get('nombre').touched">
+              <small *ngIf="frm_Participante.get('nombre').hasError('required')" style="color: red">El nombre es requerido</small>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label" for="apellido">Apellido</label>
+            <input formControlName="apellido" type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido del participante" />
+            <div *ngIf="frm_Participante.get('apellido').invalid && frm_Participante.get('apellido').touched">
+              <small *ngIf="frm_Participante.get('apellido').hasError('required')" style="color: red">El apellido es requerido</small>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label" for="email">Correo Electrónico</label>
+            <input formControlName="email" type="email" class="form-control" id="email" placeholder="Ingrese el correo electrónico" />
+            <div *ngIf="frm_Participante.get('email').invalid && frm_Participante.get('email').touched">
+              <small *ngIf="frm_Participante.get('email').hasError('required')" style="color: red">El correo es requerido</small>
+              <small *ngIf="frm_Participante.get('email').hasError('email')" style="color: red">Debe ingresar un correo válido</small>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label" for="telefono">Teléfono</label>
+            <input formControlName="telefono" type="text" class="form-control" id="telefono" placeholder="Ingrese el número de teléfono" />
+            <div *ngIf="frm_Participante.get('telefono').invalid && frm_Participante.get('telefono').touched">
+              <small *ngIf="frm_Participante.get('telefono').hasError('required')" style="color: red">El teléfono es requerido</small>
+            </div>
+          </div>
+          <div class="d-grid mt-3">
+            <button type="submit" class="btn btn-primary" [disabled]="frm_Participante.invalid">Grabar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

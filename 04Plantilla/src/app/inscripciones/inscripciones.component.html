@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="Lista de Inscripciones" blockClass="pc-component">
+        <div class="col-md-12 col-xl-8">
+          <h5 class="mb-3">
+            <a href="nuevainscripcion" class="btn btn-outline-dark">Nueva Inscripción</a>
+          </h5>
+          <div class="card tbl-card">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Inscripción</th>
+                    <th>Participante</th>
+                    <th>Taller</th>
+                    <th>Total</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let inscripcion of listaInscripciones; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>000{{ inscripcion.idInscripcion }}</td>
+                    <td>{{ inscripcion.NombreParticipante }}</td>
+                    <td>{{ inscripcion.NombreTaller }}</td>
+                    <td>{{ inscripcion.Total | currency }}</td>
+                    <td>
+                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarinscripcion/', inscripcion.idInscripcion]">
+                        Editar
+                      </button>
+                      <button (click)="eliminar(inscripcion.idInscripcion)" type="button" class="btn btn-outline-danger">Eliminar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </app-card>
+    </div>
+  </div>
+  
