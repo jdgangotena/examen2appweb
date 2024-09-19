@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between align-items-end mb-4">
       <h3 class="mb-0">
         {{ titulo }}
-        <!-- Interpolación sirve para enviar datos desde el .ts hacia el html -->
+        <!-- Interpolación para enviar datos desde el .ts hacia el html -->
       </h3>
     </div>
     <form [formGroup]="frm_Taller" (ngSubmit)="grabar()">
@@ -17,7 +17,7 @@
             class="form-control"
             id="taller_id"
             placeholder="Ingrese el código del taller"
-            [attr.disabled]="isEdit ? true : null"  <!-- Desactiva el campo si es una edición -->
+            [attr.disabled]="isEdit ? true : null"  
           />
           <div *ngIf="frm_Taller.get('taller_id').invalid && frm_Taller.get('taller_id').touched">
             <small *ngIf="frm_Taller.get('taller_id').hasError('required')" style="color: red">

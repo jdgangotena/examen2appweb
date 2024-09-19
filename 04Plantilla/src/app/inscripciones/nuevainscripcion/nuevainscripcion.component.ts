@@ -26,6 +26,8 @@ export class NuevainscripcionComponent implements OnInit {
   listaParticipantes: IParticipantes[] = [];
   listaTalleres: ITalleres[] = [];
   totalapagar: number = 0;
+  selectedParticipante: IParticipantes | null = null;
+  tallerSeleccionado: ITalleres[] = [];
   
   // FormGroup
   frm_inscripcion: FormGroup;
@@ -40,12 +42,12 @@ export class NuevainscripcionComponent implements OnInit {
 
   ngOnInit(): void {
     this.frm_inscripcion = new FormGroup({
-      Fecha: new FormControl('', Validators.required),
-      Participante_id: new FormControl('', Validators.required),
-      Taller_id: new FormControl('', Validators.required),
-      Sub_total: new FormControl('', Validators.required),
-      Valor_IVA: new FormControl('0.12', Validators.required),
-      Total: new FormControl('', Validators.required)
+      fecha_inscripcion: new FormControl('', Validators.required),
+      participante_id: new FormControl('', Validators.required),
+      taller_id: new FormControl('', Validators.required),
+      sub_total: new FormControl('', Validators.required),
+      valor_iva: new FormControl('0.12', Validators.required),
+      total: new FormControl('', Validators.required)
     });
 
     // Cargar lista de participantes
@@ -79,12 +81,12 @@ export class NuevainscripcionComponent implements OnInit {
 
     // Crear nueva inscripción
     const inscripcion: IInscripciones = {
-      estado: 1, // Asignar un valor predeterminado o necesario para el estado
-      fecha_inscripcion: new Date(this.frm_inscripcion.get('Fecha')?.value),
-      valor_inscripcion: this.frm_inscripcion.get('Sub_total')?.value,
-      cupos: 0, // Ajusta este valor según la lógica necesaria
-      talleres_taller_id: this.frm_inscripcion.get('Taller_id')?.value,
-      participantes_participante_id: this.frm_inscripcion.get('Participante_id')?.value
+      estado: 1,
+      fecha_inscripcion: new Date(this.frm_inscripcion.get('fecha_inscripcion')?.value),
+      valor_inscripcion: this.frm_inscripcion.get('sub_total')?.value,
+      cupos: 0,
+      talleres_taller_id: this.frm_inscripcion.get('taller_id')?.value,
+      participantes_participante_id: this.frm_inscripcion.get('participante_id')?.value
     };
 
     this.inscripcionService.insertar(inscripcion).subscribe((respuesta) => {
@@ -97,22 +99,22 @@ export class NuevainscripcionComponent implements OnInit {
     });
   }
 
-  // Método para realizar cálculos del total a pagar
   calculos() {
-    const sub_total = this.frm_inscripcion.get('Sub_total')?.value;
-    const iva = this.frm_inscripcion.get('Valor_IVA')?.value;
+    const sub_total = this.frm_inscripcion.get('sub_total')?.value || 0;
+    const iva = this.frm_inscripcion.get('valor_iva')?.value || 0.12;
     const total_iva = sub_total * iva;
     this.totalapagar = parseFloat(sub_total) + total_iva;
-    this.frm_inscripcion.get('Total')?.setValue(this.totalapagar);
+    this.frm_inscripcion.get('total')?.setValue(this.totalapagar);
   }
 
-  // Cambiar valor del participante seleccionado
   cambioParticipante(event: any) {
-    this.frm_inscripcion.get('Participante_id')?.setValue(event.target.value);
+    this.frm_inscripcion.get('participante_id')?.setValue(event.target.value);
   }
 
-  // Cambiar valor del taller seleccionado
   cambioTaller(event: any) {
-    this.frm_inscripcion.get('Taller_id')?.setValue(event.target.value);
+    this.frm_inscripcion.get('taller_id')?.setValue(event.target.value);
   }
+  cargaModal(tallerForm: any) {
+    console.log('Modal cargado con el formulario:', tallerForm);
+}
 }

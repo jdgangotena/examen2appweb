@@ -27,7 +27,7 @@
                   <td>{{ taller.descripcion }}</td>
                   <td>{{ taller.fecha | date:'short' }}</td>
                   <td>{{ taller.ubicacion }}</td>
-                  <td>
+                  <td class="text-end">
                     <button type="button" class="btn btn-outline-success" [routerLink]="['/editartaller', taller.taller_id]">
                       Editar
                     </button>

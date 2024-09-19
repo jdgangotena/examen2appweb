@@ -11,10 +11,12 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Inscripción</th>
+                  <th>ID Inscripción</th>
                   <th>Participante</th>
                   <th>Taller</th>
+                  <th>Fecha</th>
                   <th>Total</th>
+                  <th>Estado</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -22,9 +24,11 @@
                 <tr *ngFor="let inscripcion of listaInscripciones; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>000{{ inscripcion.inscripcion_id }}</td>
-                  <td>{{ inscripcion.NombreParticipante }}</td>
-                  <td>{{ inscripcion.NombreTaller }}</td>
+                  <td>{{ inscripcion.participantes_participante_id }}</td> <!-- Cambiado a ID del Participante -->
+                  <td>{{ inscripcion.talleres_taller_id }}</td> <!-- Cambiado a ID del Taller -->
+                  <td>{{ inscripcion.fecha_inscripcion | date }}</td> <!-- Mostrando fecha de inscripción -->
                   <td>{{ inscripcion.valor_inscripcion | currency }}</td>
+                  <td>{{ inscripcion.estado === 1 ? 'Activo' : 'Inactivo' }}</td> <!-- Mostrar estado -->
                   <td>
                     <button type="button" class="btn btn-outline-success" [routerLink]="['/editarinscripcion/', inscripcion.inscripcion_id]">
                       Editar

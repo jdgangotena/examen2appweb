@@ -49,4 +49,9 @@ export class TalleresComponent implements OnInit {
       }
     });
   }
+
+
+trackByFn(index: number, item: ITalleres): number | undefined {
+  return item.taller_id; // Devuelve el ID del taller para rastrear los elementos
+}
 }
