@@ -2,8 +2,8 @@
   <div class="card-body">
     <div class="d-flex justify-content-between align-items-end mb-4">
       <h3 class="mb-0">
-        {{ titulo }}
-        <!-- Interpolación para enviar datos desde el .ts hacia el html -->
+        {{ editar ? 'Editar Taller' : 'Nuevo Taller' }}
+        <!-- Interpolación para mostrar si es una edición o un nuevo taller -->
       </h3>
     </div>
     <form [formGroup]="frm_Taller" (ngSubmit)="grabar()">
@@ -17,7 +17,7 @@
             class="form-control"
             id="taller_id"
             placeholder="Ingrese el código del taller"
-            [attr.disabled]="isEdit ? true : null"  
+            [attr.disabled]="editar ? true : null"  
           />
           <div *ngIf="frm_Taller.get('taller_id').invalid && frm_Taller.get('taller_id').touched">
             <small *ngIf="frm_Taller.get('taller_id').hasError('required')" style="color: red">
