@@ -49,7 +49,7 @@ const routes: Routes = [
         //canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'inscripciones/nuevo',
+        path: 'nuevainscripcion',
         loadComponent: () => import('./inscripciones/nuevainscripcion/nuevainscripcion.component').then(m => m.NuevainscripcionComponent),
         //canActivate: [usuariosGuardGuard]
       },
@@ -64,7 +64,7 @@ const routes: Routes = [
         //canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'participantes/nuevo',
+        path: 'nuevoparticipante',
         loadComponent: () => import('./participantes/nuevoparticipante/nuevoparticipante.component').then(m => m.NuevoparticipanteComponent),
         //canActivate: [usuariosGuardGuard]
       },
@@ -79,7 +79,7 @@ const routes: Routes = [
         //canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'talleres/nuevo',
+        path: 'nuevotaller',
         loadComponent: () => import('./talleres/nuevotaller/nuevotaller.component').then(m => m.NuevotallerComponent),
         //canActivate: [usuariosGuardGuard]
       },
