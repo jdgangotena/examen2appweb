@@ -71,45 +71,30 @@ export const NavigationItems: NavigationItem[] = [
     icon: 'icon-navigation',
     children: [
       {
-        id: 'proveedores',
-        title: 'Proveedores',
+        id: 'talleres',
+        title: 'Talleres',
         type: 'item',
         classes: 'nav-item',
-        url: '/proveedores',
-        icon: ''
-      },
-      {
-        id: 'color',
-        title: 'Clientes',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/clientes',
+        url: '/talleres',
         icon: 'bg-colors'
       },
       {
-        id: 'tabler',
-        title: 'Facturas',
+        id: 'participantes',
+        title: 'Participantes',
         type: 'item',
         classes: 'nav-item',
-        url: '/facturas',
+        url: '/participantes',
+        icon: 'bg-colors'
+      },
+      {
+        id: 'inscripciones',
+        title: 'Inscripciones',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/inscripciones',
         icon: 'ant-design'
       }, //
-      {
-        id: 'tabler',
-        title: 'Unidad de Medida',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/unidadmedida',
-        icon: 'ant-design'
-      }, //
-      {
-        id: 'tabler',
-        title: 'Productos',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/productos',
-        icon: 'ant-design'
-      }
+      
     ]
   },
 
