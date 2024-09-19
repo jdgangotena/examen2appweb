@@ -11,19 +11,20 @@ import { TallerService } from 'src/app/Services/talleres.service';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
+import { IInscripciones } from 'src/app/Interfaces/iinscripciones'; // Asegúrate de tener la interfaz importada
 
 @Component({
   selector: 'app-nuevainscripcion',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './nuevainscripcion.component.html',
-  styleUrl: './nuevainscripcion.component.scss'
+  styleUrls: ['./nuevainscripcion.component.scss']
 })
 export class NuevainscripcionComponent implements OnInit {
   // Variables
   titulo = 'Nueva Inscripción';
-  listaParticipantes: IParticipante[] = [];
-  listaTalleres: ITaller[] = [];
+  listaParticipantes: IParticipantes[] = [];
+  listaTalleres: ITalleres[] = [];
   totalapagar: number = 0;
   
   // FormGroup
@@ -77,19 +78,21 @@ export class NuevainscripcionComponent implements OnInit {
     });
 
     // Crear nueva inscripción
-    const inscripcion = {
-      Fecha: this.frm_inscripcion.get('Fecha')?.value,
-      Participante_id: this.frm_inscripcion.get('Participante_id')?.value,
-      Taller_id: this.frm_inscripcion.get('Taller_id')?.value,
-      Sub_total: this.frm_inscripcion.get('Sub_total')?.value,
-      Valor_IVA: this.frm_inscripcion.get('Valor_IVA')?.value,
-      Total: this.totalapagar
+    const inscripcion: IInscripciones = {
+      estado: 1, // Asignar un valor predeterminado o necesario para el estado
+      fecha_inscripcion: new Date(this.frm_inscripcion.get('Fecha')?.value),
+      valor_inscripcion: this.frm_inscripcion.get('Sub_total')?.value,
+      cupos: 0, // Ajusta este valor según la lógica necesaria
+      talleres_taller_id: this.frm_inscripcion.get('Taller_id')?.value,
+      participantes_participante_id: this.frm_inscripcion.get('Participante_id')?.value
     };
 
     this.inscripcionService.insertar(inscripcion).subscribe((respuesta) => {
       if (parseInt(respuesta) > 0) {
         alert('Inscripción guardada');
         this.navegacion.navigate(['/inscripciones']);
+      } else {
+        alert('Error al guardar la inscripción');
       }
     });
   }
@@ -99,7 +102,7 @@ export class NuevainscripcionComponent implements OnInit {
     const sub_total = this.frm_inscripcion.get('Sub_total')?.value;
     const iva = this.frm_inscripcion.get('Valor_IVA')?.value;
     const total_iva = sub_total * iva;
-    this.totalapagar = parseInt(sub_total) + total_iva;
+    this.totalapagar = parseFloat(sub_total) + total_iva;
     this.frm_inscripcion.get('Total')?.setValue(this.totalapagar);
   }
 

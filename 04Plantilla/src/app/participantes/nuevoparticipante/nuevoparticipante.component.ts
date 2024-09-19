@@ -16,11 +16,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NuevoparticipanteComponent implements OnInit {
   frm_Participante = new FormGroup({
     // idParticipante: new FormControl(), // Uncomment if you have an ID field
-    Nombre: new FormControl('', Validators.required),
-    Apellido: new FormControl('', Validators.required),
-    Telefono: new FormControl('', Validators.required),
-    Cedula: new FormControl('', [Validators.required, this.validadorCedulaEcuador]),
-    Correo: new FormControl('', [Validators.required, Validators.email])
+    nombre: new FormControl('', Validators.required),
+    apellido: new FormControl('', Validators.required),
+    telefono: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email])
   });
   
   idParticipante = 0;
@@ -36,11 +35,10 @@ export class NuevoparticipanteComponent implements OnInit {
     this.idParticipante = parseInt(this.ruta.snapshot.paramMap.get('idParticipante'), 10);
     if (this.idParticipante > 0) {
       this.participanteServicio.uno(this.idParticipante).subscribe((unParticipante) => {
-        this.frm_Participante.controls['Nombre'].setValue(unParticipante.Nombre);
-        this.frm_Participante.controls['Apellido'].setValue(unParticipante.Apellido);
-        this.frm_Participante.controls['Telefono'].setValue(unParticipante.Telefono);
-        this.frm_Participante.controls['Cedula'].setValue(unParticipante.Cedula);
-        this.frm_Participante.controls['Correo'].setValue(unParticipante.Correo);
+        this.frm_Participante.controls['nombre'].setValue(unParticipante.nombre);
+        this.frm_Participante.controls['apellido'].setValue(unParticipante.apellido);
+        this.frm_Participante.controls['telefono'].setValue(unParticipante.telefono);
+        this.frm_Participante.controls['email'].setValue(unParticipante.email);
 
         this.titulo = 'Editar Participante';
       });
@@ -49,21 +47,20 @@ export class NuevoparticipanteComponent implements OnInit {
 
   grabar() {
     let participante: IParticipantes = {
-      idParticipante: this.idParticipante,
-      Nombre: this.frm_Participante.controls['Nombre'].value,
-      Apellido: this.frm_Participante.controls['Apellido'].value,
-      Telefono: this.frm_Participante.controls['Telefono'].value,
-      Cedula: this.frm_Participante.controls['Cedula'].value,
-      Correo: this.frm_Participante.controls['Correo'].value
+      participante_id: this.idParticipante > 0 ? this.idParticipante : undefined,
+      nombre: this.frm_Participante.controls['nombre'].value,
+      apellido: this.frm_Participante.controls['apellido'].value,
+      telefono: this.frm_Participante.controls['telefono'].value,
+      email: this.frm_Participante.controls['email'].value
     };
 
     Swal.fire({
       title: 'Participantes',
-      text: 'Desea guardar al Participante ' + this.frm_Participante.controls['Nombre'].value,
+      text: 'Desea guardar al Participante ' + this.frm_Participante.controls['nombre'].value,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#f00',
-      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       confirmButtonText: 'Grabar!'
     }).then((result) => {
       if (result.isConfirmed) {
