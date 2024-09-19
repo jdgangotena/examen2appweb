@@ -61,18 +61,12 @@
                   <tr>
                     <th>Nombre del Taller</th>
                     <th>Fecha</th>
-                    <th>Subtotal</th>
-                    <th>IVA (12%)</th>
-                    <th>Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of tallerSeleccionado">
                     <td>{{ item.nombre }}</td>
                     <td>{{ item.fecha | date }}</td>
-                    <td>{{ item.subtotal | currency }}</td>
-                    <td>{{ item.iva | currency }}</td>
-                    <td>{{ item.total | currency }}</td>
                   </tr>
                 </tbody>
               </table>
