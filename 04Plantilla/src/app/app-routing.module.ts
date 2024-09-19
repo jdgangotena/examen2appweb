@@ -29,7 +29,7 @@ const routes: Routes = [
       {
         path: 'dashboard/default',
         loadComponent: () => import('./demo/default/dashboard/dashboard.component').then(c => c.DefaultComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'typography',
@@ -46,47 +46,47 @@ const routes: Routes = [
       {
         path: 'inscripciones',
         loadComponent: () => import('./inscripciones/inscripciones.component').then(m => m.InscripcionesComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'inscripciones/nuevo',
         loadComponent: () => import('./inscripciones/nuevainscripcion/nuevainscripcion.component').then(m => m.NuevainscripcionComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'inscripciones/editar/:id',
         loadComponent: () => import('./inscripciones/nuevainscripcion/nuevainscripcion.component').then(m => m.NuevainscripcionComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'participantes',
         loadComponent: () => import('./participantes/participantes.component').then(m => m.ParticipantesComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'participantes/nuevo',
         loadComponent: () => import('./participantes/nuevoparticipante/nuevoparticipante.component').then(m => m.NuevoparticipanteComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'participantes/editar/:id',
         loadComponent: () => import('./participantes/nuevoparticipante/nuevoparticipante.component').then(m => m.NuevoparticipanteComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'talleres',
         loadComponent: () => import('./talleres/talleres.component').then(m => m.TalleresComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'talleres/nuevo',
         loadComponent: () => import('./talleres/nuevotaller/nuevotaller.component').then(m => m.NuevotallerComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       },
       {
         path: 'talleres/editar/:id',
         loadComponent: () => import('./talleres/nuevotaller/nuevotaller.component').then(m => m.NuevotallerComponent),
-        canActivate: [usuariosGuardGuard]
+        //canActivate: [usuariosGuardGuard]
       }
     ]
   },
