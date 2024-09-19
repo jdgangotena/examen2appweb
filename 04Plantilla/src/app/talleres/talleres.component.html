@@ -1,47 +1,44 @@
 <div class="row">
-    <div class="col-sm-12">
-      <app-card cardTitle="Lista de Talleres" blockClass="pc-component">
-        <div class="col-md-12 col-xl-8">
-          <h5 class="mb-3">
-            <a routerLink="/nuevotaller" class="btn btn-outline-dark">Nuevo Taller</a>
-          </h5>
-          <div class="card tbl-card">
-            <div class="table-responsive">
-              <table class="table table-hover mb-0">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Código del Taller</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Duración</th>
-                    <th class="text-end">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let taller of listaTalleres; let i = index; trackBy: trackByFn">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ taller.Codigo_Taller }}</td>
-                    <td>{{ taller.Nombre_Taller }}</td>
-                    <td>{{ taller.Descripcion }}</td>
-                    <td>{{ taller.Fecha | date }}</td>
-                    <td>{{ taller.Hora | date:'shortTime' }}</td>
-                    <td>{{ taller.Duracion }}</td>
-                    <td>
-                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editartaller', taller.idTaller]">
-                        Editar
-                      </button>
-                      <button (click)="eliminar(taller.idTaller)" type="button" class="btn btn-outline-danger">Eliminar</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+  <div class="col-sm-12">
+    <app-card cardTitle="Lista de Talleres" blockClass="pc-component">
+      <div class="col-md-12 col-xl-8">
+        <h5 class="mb-3">
+          <a routerLink="/nuevotaller" class="btn btn-outline-dark">Nuevo Taller</a>
+        </h5>
+        <div class="card tbl-card">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Código del Taller</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Fecha</th>
+                  <th>Ubicación</th>
+                  <th class="text-end">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let taller of listaTalleres; let i = index; trackBy: trackByFn">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ taller.taller_id }}</td>
+                  <td>{{ taller.nombre }}</td>
+                  <td>{{ taller.descripcion }}</td>
+                  <td>{{ taller.fecha | date:'short' }}</td>
+                  <td>{{ taller.ubicacion }}</td>
+                  <td>
+                    <button type="button" class="btn btn-outline-success" [routerLink]="['/editartaller', taller.taller_id]">
+                      Editar
+                    </button>
+                    <button (click)="eliminar(taller.taller_id)" type="button" class="btn btn-outline-danger">Eliminar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </app-card>
-    </div>
+      </div>
+    </app-card>
   </div>
-  
+</div>

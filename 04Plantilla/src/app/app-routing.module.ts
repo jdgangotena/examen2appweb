@@ -1,15 +1,24 @@
-// angular import
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Project import
+// Layout Imports
 import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.component';
 import { GuestComponent } from './theme/layouts/guest/guest.component';
+
+// Guard Imports
 import { usuariosGuardGuard } from './Guards/usuarios-guard.guard';
+
+// Component Imports
+import { InscripcionesComponent } from './inscripciones/inscripciones.component';
+import { ParticipantesComponent } from './participantes/participantes.component';
+import { TalleresComponent } from './talleres/talleres.component';
+import { NuevoparticipanteComponent } from './participantes/nuevoparticipante/nuevoparticipante.component';
+import { NuevotallerComponent } from './talleres/nuevotaller/nuevotaller.component';
+import { NuevainscripcionComponent } from './inscripciones/nuevainscripcion/nuevainscripcion.component';
 
 const routes: Routes = [
   {
-    path: '', //url
+    path: '', // URL root
     component: AdminComponent,
     children: [
       {
@@ -19,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: 'dashboard/default',
-        loadComponent: () => import('./demo/default/dashboard/dashboard.component').then((c) => c.DefaultComponent),
+        loadComponent: () => import('./demo/default/dashboard/dashboard.component').then(c => c.DefaultComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
@@ -35,78 +44,48 @@ const routes: Routes = [
         loadComponent: () => import('./demo/other/sample-page/sample-page.component')
       },
       {
-        path: 'proveedores',
-        loadComponent: () => import('./proveedores/proveedores.component').then((m) => m.ProveedoresComponent),
+        path: 'inscripciones',
+        loadComponent: () => import('./inscripciones/inscripciones.component').then(m => m.InscripcionesComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'nuevoproveedor',
-        loadComponent: () => import('./proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent),
+        path: 'inscripciones/nuevo',
+        loadComponent: () => import('./inscripciones/nuevainscripcion/nuevainscripcion.component').then(m => m.NuevainscripcionComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'editarproveedor/:id',
-        loadComponent: () => import('./proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent),
+        path: 'inscripciones/editar/:id',
+        loadComponent: () => import('./inscripciones/nuevainscripcion/nuevainscripcion.component').then(m => m.NuevainscripcionComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'clientes',
-        loadComponent: () => import('./clientes/clientes.component').then((m) => m.ClientesComponent),
+        path: 'participantes',
+        loadComponent: () => import('./participantes/participantes.component').then(m => m.ParticipantesComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'nuevocliente',
-        loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent),
+        path: 'participantes/nuevo',
+        loadComponent: () => import('./participantes/nuevoparticipante/nuevoparticipante.component').then(m => m.NuevoparticipanteComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'editarcliente/:idCliente',
-        loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent),
+        path: 'participantes/editar/:id',
+        loadComponent: () => import('./participantes/nuevoparticipante/nuevoparticipante.component').then(m => m.NuevoparticipanteComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'editarfactura/:id',
-        loadComponent: () => import('./facturas/nuevafactura/nuevafactura.component').then((m) => m.NuevafacturaComponent)
-      },
-      {
-        path: 'nuevafactura',
-        loadComponent: () => import('./facturas/nuevafactura/nuevafactura.component').then((m) => m.NuevafacturaComponent),
+        path: 'talleres',
+        loadComponent: () => import('./talleres/talleres.component').then(m => m.TalleresComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'facturas',
-        loadComponent: () => import('./facturas/facturas.component').then((m) => m.FacturasComponent)
-      },
-      {
-        path: 'unidadmedida',
-        loadComponent: () => import('./unidadmedida/unidadmedida.component').then((m) => m.UnidadmedidaComponent),
+        path: 'talleres/nuevo',
+        loadComponent: () => import('./talleres/nuevotaller/nuevotaller.component').then(m => m.NuevotallerComponent),
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'nuevaunidadmedida',
-        loadComponent: () =>
-          import('./unidadmedida/nuevaunidadmedida/nuevaunidadmedida.component').then((m) => m.NuevaunidadmedidaComponent),
-        canActivate: [usuariosGuardGuard]
-      },
-      {
-        path: 'editarunidadmedida/:id',
-        loadComponent: () =>
-          import('./unidadmedida/nuevaunidadmedida/nuevaunidadmedida.component').then((m) => m.NuevaunidadmedidaComponent),
-        canActivate: [usuariosGuardGuard]
-      },
-      {
-        path: 'productos',
-        loadComponent: () => import('./productos/productos.component').then((m) => m.ProductosComponent),
-        canActivate: [usuariosGuardGuard]
-      },
-      {
-        path: 'nuevoproducto',
-        loadComponent: () => import('./productos/nuevoproducto/nuevoproducto.component').then((m) => m.NuevoproductoComponent),
-        canActivate: [usuariosGuardGuard]
-      },
-      {
-        path: 'editarproducto/:id',
-        loadComponent: () => import('./productos/nuevoproducto/nuevoproducto.component').then((m) => m.NuevoproductoComponent),
+        path: 'talleres/editar/:id',
+        loadComponent: () => import('./talleres/nuevotaller/nuevotaller.component').then(m => m.NuevotallerComponent),
         canActivate: [usuariosGuardGuard]
       }
     ]

@@ -1,1 +1,101 @@
-<p>nuevotaller works!</p>
+<div class="card my-5">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <h3 class="mb-0">
+        {{ titulo }}
+        <!-- Interpolación sirve para enviar datos desde el .ts hacia el html -->
+      </h3>
+    </div>
+    <form [formGroup]="frm_Taller" (ngSubmit)="grabar()">
+      <div class="row">
+        <!-- Código del Taller -->
+        <div class="form-group mb-3">
+          <label class="form-label" for="taller_id">Código del Taller</label>
+          <input
+            formControlName="taller_id"
+            type="text"
+            class="form-control"
+            id="taller_id"
+            placeholder="Ingrese el código del taller"
+            [attr.disabled]="isEdit ? true : null"  <!-- Desactiva el campo si es una edición -->
+          />
+          <div *ngIf="frm_Taller.get('taller_id').invalid && frm_Taller.get('taller_id').touched">
+            <small *ngIf="frm_Taller.get('taller_id').hasError('required')" style="color: red">
+              El código del taller es requerido
+            </small>
+          </div>
+        </div>
+  
+        <!-- Nombre del Taller -->
+        <div class="form-group mb-3">
+          <label class="form-label" for="nombre">Nombre del Taller</label>
+          <input
+            formControlName="nombre"
+            type="text"
+            class="form-control"
+            id="nombre"
+            placeholder="Ingrese el nombre del taller"
+          />
+          <div *ngIf="frm_Taller.get('nombre').invalid && frm_Taller.get('nombre').touched">
+            <small *ngIf="frm_Taller.get('nombre').hasError('required')" style="color: red">
+              El nombre del taller es requerido
+            </small>
+          </div>
+        </div>
+  
+        <!-- Descripción -->
+        <div class="form-group mb-3">
+          <label class="form-label" for="descripcion">Descripción</label>
+          <textarea
+            formControlName="descripcion"
+            class="form-control"
+            id="descripcion"
+            placeholder="Ingrese la descripción del taller"
+          ></textarea>
+          <div *ngIf="frm_Taller.get('descripcion').invalid && frm_Taller.get('descripcion').touched">
+            <small *ngIf="frm_Taller.get('descripcion').hasError('required')" style="color: red">
+              La descripción es requerida
+            </small>
+          </div>
+        </div>
+  
+        <!-- Fecha -->
+        <div class="form-group mb-3">
+          <label class="form-label" for="fecha">Fecha</label>
+          <input
+            type="datetime-local"
+            formControlName="fecha"
+            class="form-control"
+            id="fecha"
+          />
+          <div *ngIf="frm_Taller.get('fecha').invalid && frm_Taller.get('fecha').touched">
+            <small *ngIf="frm_Taller.get('fecha').hasError('required')" style="color: red">
+              La fecha y hora son requeridos
+            </small>
+          </div>
+        </div>
+  
+        <!-- Ubicación -->
+        <div class="form-group mb-3">
+          <label class="form-label" for="ubicacion">Ubicación</label>
+          <input
+            type="text"
+            formControlName="ubicacion"
+            class="form-control"
+            id="ubicacion"
+            placeholder="Ingrese la ubicación del taller"
+          />
+          <div *ngIf="frm_Taller.get('ubicacion').invalid && frm_Taller.get('ubicacion').touched">
+            <small *ngIf="frm_Taller.get('ubicacion').hasError('required')" style="color: red">
+              La ubicación es requerida
+            </small>
+          </div>
+        </div>
+  
+        <div class="d-grid mt-3">
+          <button type="submit" class="btn btn-primary" [disabled]="frm_Taller.invalid">Grabar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
