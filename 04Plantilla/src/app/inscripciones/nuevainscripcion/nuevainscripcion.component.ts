@@ -45,7 +45,7 @@ export class NuevainscripcionComponent implements OnInit {
       fecha_inscripcion: new FormControl('', Validators.required),
       participante_id: new FormControl('', Validators.required),
       taller_id: new FormControl('', Validators.required),
-      sub_total: new FormControl('', Validators.required),
+      valor_inscripcion: new FormControl('', Validators.required),
       valor_iva: new FormControl('0.12', Validators.required),
       total: new FormControl('', Validators.required)
     });

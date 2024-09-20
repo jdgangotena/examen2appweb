@@ -90,6 +90,17 @@
           </div>
         </div>
         <div class="d-grid mt-3">-->
+          <!-- Valor de Inscripción -->
+<div class="row">
+  <div class="col-12">
+    <h5>Valor de Inscripción</h5>
+    <input type="number" class="form-control" formControlName="valor_inscripcion" />
+    <div *ngIf="frm_inscripcion.get('valor_inscripcion').invalid && frm_inscripcion.get('valor_inscripcion').touched">
+      <small style="color: red">El valor de inscripción es requerido</small>
+    </div>
+  </div>
+</div>
+<hr />
           <button type="submit" class="btn btn-primary">Grabar Inscripción</button>
         </div>
       </form>
