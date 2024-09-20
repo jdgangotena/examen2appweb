@@ -50,10 +50,26 @@
             </div>
           </div>
           <hr />
-          <!-- Detalle de la Inscripción -->
+          <!-- Selección de Taller -->
           <div class="row">
             <div class="col-12">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTallerModal" (click)="cambioTaller($event)">
+              <h5>Seleccionar Taller</h5>
+              <select class="form-control" formControlName="taller_id" (change)="cambioTaller($event)">
+                <option value="">Seleccione un Taller</option>
+                <option *ngFor="let taller of listaTalleres" [value]="taller.taller_id">
+                  {{ taller.nombre }} - {{ taller.fecha | date }}
+                </option>
+              </select>
+              <div *ngIf="frm_inscripcion.get('taller_id').invalid && frm_inscripcion.get('taller_id').touched">
+                <small style="color: red">Seleccione un taller</small>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <!-- Detalle de la Inscripción 
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTallerModal">
                 Agregar Taller
               </button>
               <table class="table table-bordered">
@@ -73,7 +89,7 @@
             </div>
           </div>
         </div>
-        <div class="d-grid mt-3">
+        <div class="d-grid mt-3">-->
           <button type="submit" class="btn btn-primary">Grabar Inscripción</button>
         </div>
       </form>
@@ -81,7 +97,7 @@
   </div>
 </div>
 
-<!-- Modal para Agregar Taller -->
+<!-- Modal para Agregar Taller 
 <div class="modal fade" id="addTallerModal" tabindex="-1" aria-labelledby="addTallerModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -104,4 +120,4 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->

@@ -36,18 +36,18 @@ switch ($_GET["op"]) {
         //TODO: Procedimeinto para insertar un club en la base de datos
     case 'insertar':     
         $nombre = $_POST["nombre"];
-        $descripcion = $_POST["deporte"];
+        $descripcion = $_POST["descripcion"];
         $fecha = $_POST["fecha"];
         $ubicacion = $_POST["ubicacion"];
         $datos = array();
-        $datos = $talleres->insertar($nombre, $descripcion, $ubicacion);
+        $datos = $talleres->insertar($nombre, $descripcion, $fecha, $ubicacion);
         echo json_encode($datos);
         break;
         //TODO: Procedimeinto para actualziar un club en la base de datos
     case 'actualizar':
         $taller_id = $_POST["taller_id"];
         $nombre = $_POST["nombre"];
-        $descripcion = $_POST["deporte"];
+        $descripcion = $_POST["descripcion"];
         $fecha = $_POST["fecha"];
         $ubicacion = $_POST["ubicacion"];
         $datos = array();

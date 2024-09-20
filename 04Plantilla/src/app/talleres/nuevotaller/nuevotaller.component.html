@@ -8,24 +8,6 @@
     </div>
     <form [formGroup]="frm_Taller" (ngSubmit)="grabar()">
       <div class="row">
-        <!-- Código del Taller -->
-        <div class="form-group mb-3">
-          <label class="form-label" for="taller_id">Código del Taller</label>
-          <input
-            formControlName="taller_id"
-            type="text"
-            class="form-control"
-            id="taller_id"
-            placeholder="Ingrese el código del taller"
-            [attr.disabled]="editar ? true : null"  
-          />
-          <div *ngIf="frm_Taller.get('taller_id').invalid && frm_Taller.get('taller_id').touched">
-            <small *ngIf="frm_Taller.get('taller_id').hasError('required')" style="color: red">
-              El código del taller es requerido
-            </small>
-          </div>
-        </div>
-  
         <!-- Nombre del Taller -->
         <div class="form-group mb-3">
           <label class="form-label" for="nombre">Nombre del Taller</label>
@@ -42,7 +24,7 @@
             </small>
           </div>
         </div>
-  
+
         <!-- Descripción -->
         <div class="form-group mb-3">
           <label class="form-label" for="descripcion">Descripción</label>
@@ -58,23 +40,23 @@
             </small>
           </div>
         </div>
-  
+
         <!-- Fecha -->
         <div class="form-group mb-3">
           <label class="form-label" for="fecha">Fecha</label>
           <input
-            type="datetime-local"
+            type="date"
             formControlName="fecha"
             class="form-control"
             id="fecha"
           />
           <div *ngIf="frm_Taller.get('fecha').invalid && frm_Taller.get('fecha').touched">
             <small *ngIf="frm_Taller.get('fecha').hasError('required')" style="color: red">
-              La fecha y hora son requeridos
+              La fecha es requerida
             </small>
           </div>
         </div>
-  
+
         <!-- Ubicación -->
         <div class="form-group mb-3">
           <label class="form-label" for="ubicacion">Ubicación</label>
@@ -91,7 +73,7 @@
             </small>
           </div>
         </div>
-  
+
         <div class="d-grid mt-3">
           <button type="submit" class="btn btn-primary" [disabled]="frm_Taller.invalid">Grabar</button>
         </div>

@@ -25,7 +25,7 @@ class talleres
         return $datos;
     }
 
-    public function insertar($nombre, $descripcion, $fecha, $ubicacion) //insert into talleres (nombre, descripcion, ubicacion) values ($nombre, $descripcion, $ubicacion)
+    public function insertar($nombre, $descripcion, $fecha, $ubicacion) 
     {
         try {
             $con = new ClaseConectar();
